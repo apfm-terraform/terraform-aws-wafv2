@@ -1,6 +1,6 @@
 resource "aws_wafv2_web_acl" "main" {
   name        = var.name
-  description = "WAFv2 ACL for ${var.name}"
+  description = var.description
 
   scope = var.scope
 
