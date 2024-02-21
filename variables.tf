@@ -3,6 +3,12 @@ variable "name" {
   description = "A friendly name of the WebACL."
 }
 
+variable "description" {
+  type        = string
+  description = "The description to apply to the webacl"
+  default     = "WAFv2 ACL"
+}
+
 variable "scope" {
   type        = string
   description = "The scope of this Web ACL. Valid options: CLOUDFRONT, REGIONAL."
