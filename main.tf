@@ -44,6 +44,12 @@ resource "aws_wafv2_web_acl" "main" {
           name        = rule.value.name
           vendor_name = rule.value.vendor_name
           version     = rule.value.version
+
+          dynamic "managed_rule_group_configs" {
+            for_each = rule.value.rule_group_configs
+            content = { for k, v in managed_rule_group_configs.value : k => v }
+          }
+
           dynamic "rule_action_override" {
             for_each = rule.value.rule_action_override
             content {
