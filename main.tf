@@ -47,7 +47,7 @@ resource "aws_wafv2_web_acl" "main" {
 
           dynamic "managed_rule_group_configs" {
             for_each = rule.value.rule_group_configs
-            content = { for k, v in managed_rule_group_configs.value : k => v }
+            content { for k, v in managed_rule_group_configs.value : k => v }
           }
 
           dynamic "rule_action_override" {
