@@ -16,12 +16,16 @@ variable "scope" {
 
 variable "managed_rules" {
   type = list(object({
-    name               = string
-    priority           = number
-    override_action    = string
-    vendor_name        = string
-    version            = optional(string)
-    rule_group_configs = optional(object({}), {})
+    name            = string
+    priority        = number
+    override_action = string
+    vendor_name     = string
+    version         = optional(string)
+    rule_group_configs = optional(list(object({
+      aws_managed_rules_bot_control_rule_set = optional(object({
+        inspection_level = string
+      }), null)
+    }), null))
     rule_action_override = list(object({
       name          = string
       action_to_use = string
@@ -34,7 +38,6 @@ variable "managed_rules" {
       priority             = 10
       override_action      = "none"
       vendor_name          = "AWS"
-      rule_group_configs   = {}
       rule_action_override = []
     },
     {
@@ -42,7 +45,6 @@ variable "managed_rules" {
       priority             = 20
       override_action      = "none"
       vendor_name          = "AWS"
-      rule_group_configs   = {}
       rule_action_override = []
     },
     {
@@ -50,7 +52,6 @@ variable "managed_rules" {
       priority             = 30
       override_action      = "none"
       vendor_name          = "AWS"
-      rule_group_configs   = {}
       rule_action_override = []
     },
     {
@@ -58,7 +59,6 @@ variable "managed_rules" {
       priority             = 40
       override_action      = "none"
       vendor_name          = "AWS"
-      rule_group_configs   = {}
       rule_action_override = []
     },
     {
@@ -66,7 +66,6 @@ variable "managed_rules" {
       priority             = 50
       override_action      = "none"
       vendor_name          = "AWS"
-      rule_group_configs   = {}
       rule_action_override = []
     },
     {
@@ -74,7 +73,6 @@ variable "managed_rules" {
       priority             = 60
       override_action      = "none"
       vendor_name          = "AWS"
-      rule_group_configs   = {}
       rule_action_override = []
     }
   ]

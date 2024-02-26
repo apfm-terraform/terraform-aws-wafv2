@@ -46,8 +46,16 @@ resource "aws_wafv2_web_acl" "main" {
           version     = rule.value.version
 
           dynamic "managed_rule_group_configs" {
-            for_each = rule.value.rule_group_configs
-            content {}
+            for_each = lookup(rule.value, "rule_group_configs", null) != null ? managed_rules.value.rule_group_configs : []
+
+            content {
+              dynamic "aws_managed_rules_bot_control_rule_set" {
+                for_each = lookup(rule_group_configs.value, "aws_managed_rules_bot_control_rule_set", null) != null ? [1] : []
+                content {
+                  inspection_level = rule_group_configs.value.aws_managed_rules_bot_control_rule_set.inspection_level
+                }
+              }
+            }
           }
 
           dynamic "rule_action_override" {
