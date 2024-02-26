@@ -25,7 +25,7 @@ variable "managed_rules" {
       aws_managed_rules_bot_control_rule_set = optional(object({
         inspection_level = string
       }), null)
-    }), null))
+    }), []))
     rule_action_override = list(object({
       name          = string
       action_to_use = string
